@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "asteroidkit": {
+      "signature": "5c4f309a9b84655a8702ec790e9aaa30",
+      "file": true
+    }
+  }
+}
