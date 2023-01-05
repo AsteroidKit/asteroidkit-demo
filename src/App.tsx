@@ -1,4 +1,3 @@
-// import { Example } from "rkwa_tsup";
 import "./App.css";
 
 import {
@@ -14,7 +13,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import AsteroidIcon from "./assets/asteroid.svg";
+import { SignMessagePage } from "./SignMessagePage";
 import { WelcomePage } from "./WelcomePage";
+import { UseAccountPage } from "./useAccountPage";
+import { UseBalancePage } from "./useBalancePage";
+import { UseBlockNumberPage } from "./UseBlockNumberPage";
+import { UseDisconnectPage } from "./UseDisconnectPage";
 
 const upAndDown = keyframes`
   from {
@@ -29,6 +33,26 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <WelcomePage />,
+  },
+  {
+    path: "/useSignMessage",
+    element: <SignMessagePage />,
+  },
+  {
+    path: "/useAccount",
+    element: <UseAccountPage />,
+  },
+  {
+    path: "/useBalance",
+    element: <UseBalancePage />,
+  },
+  {
+    path: "/useBlockNumber",
+    element: <UseBlockNumberPage />,
+  },
+  {
+    path: "/useDisconnect",
+    element: <UseDisconnectPage />,
   },
 ]);
 
@@ -90,18 +114,57 @@ function App() {
             flexDirection={"column"}
             gap={1}
           >
-            <Button size="small" variant="text" sx={{ color: "white" }}>
-              Sign Message
+            {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
+            <Button
+              size="small"
+              href="./useSignMessage"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useSignMessage
             </Button>
-            <Button size="small" variant="text" sx={{ color: "white" }}>
-              Sign Message
+            <Button
+              href="./useAccount"
+              size="small"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useAccount
             </Button>
-            <Button size="small" variant="text" sx={{ color: "white" }}>
-              Sign Message
+            <Button
+              size="small"
+              href="./useBalance"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useBalance
             </Button>
+            <Button
+              size="small"
+              href="./useBlockNumber"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useBlocknumber
+            </Button>
+            <Button
+              size="small"
+              href="./useDisconnect"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useDisconnect
+            </Button>
+            {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
           </Box>
         )}
-        <Box flexGrow="1" padding={4} color="white" display="flex">
+        <Box
+          flexGrow="1"
+          padding={4}
+          color="white"
+          display="flex"
+          justifyContent="center"
+        >
           <RouterProvider router={router} />
         </Box>
       </Box>

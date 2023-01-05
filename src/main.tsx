@@ -6,11 +6,14 @@ import { AsteroidKitProvider } from "asteroidkit";
 import { createTheme, Theme, ThemeProvider } from "@mui/material";
 
 const theme: Theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     main: "#61d3ec",
-  //   },
-  // },
+  palette: {
+    primary: {
+      main: "#ffffff",
+    },
+    secondary: {
+      main: "#B183ED",
+    },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
