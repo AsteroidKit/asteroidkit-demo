@@ -9,22 +9,22 @@ import {
   Typography,
 } from "@mui/material";
 import { rainbowkit, wagmi } from "asteroidkit";
-import {
-  createBrowserRouter,
-  Link,
-  Route,
-  RouterProvider,
-  Routes,
-} from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import AsteroidIcon from "./assets/asteroid.svg";
-import { SignMessagePage } from "./SignMessagePage";
-import { WelcomePage } from "./WelcomePage";
-import { UseAccountPage } from "./useAccountPage";
-import { UseBalancePage } from "./useBalancePage";
-import { UseBlockNumberPage } from "./UseBlockNumberPage";
-import { UseDisconnectPage } from "./UseDisconnectPage";
+import { SignMessagePage } from "./pages/SignMessagePage";
+import { UseAccountPage } from "./pages/useAccountPage";
+import { UseBalancePage } from "./pages/useBalancePage";
+import { UseBlockNumberPage } from "./pages/UseBlockNumberPage";
+import { UseDisconnectPage } from "./pages/UseDisconnectPage";
+import { WelcomePage } from "./pages/WelcomePage";
+import { UseContractReadPage } from "./pages/UseContractReadPage";
+import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
+import { UseTransaction } from "./pages/UseTransaction";
+import { UseOpenConnectModal } from "./pages/UseOpenConnectModalPage";
+import { UseOpenAccountModal } from "./pages/UseOpenAccountModalPage";
+import { UseOpenChainModal } from "./pages/UseOpenChainModalPage";
 
 const upAndDown = keyframes`
   from {
@@ -34,33 +34,6 @@ const upAndDown = keyframes`
     transform: translateY(-18px);
   }
 `;
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <WelcomePage />,
-  },
-  {
-    path: "/useSignMessage",
-    element: <SignMessagePage />,
-  },
-  {
-    path: "/useAccount",
-    element: <UseAccountPage />,
-  },
-  {
-    path: "/useBalance",
-    element: <UseBalancePage />,
-  },
-  {
-    path: "/useBlockNumber",
-    element: <UseBlockNumberPage />,
-  },
-  {
-    path: "/useDisconnect",
-    element: <UseDisconnectPage />,
-  },
-]);
 
 function App() {
   const { address, isConnected, isDisconnected } = wagmi.useAccount();
@@ -166,14 +139,70 @@ function App() {
             >
               useDisconnect
             </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useContractReadPage"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useContractReadPage
+            </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useSwitchNetwork"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useSwitchNetwork
+            </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useTransaction"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useTransaction
+            </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useConnectModal"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useConnectModal
+            </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useAccountModal"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useAccountModal
+            </Button>
+            <Button
+              size="small"
+              component={Link}
+              to="./useChainModal"
+              variant="text"
+              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+            >
+              useChainModal
+            </Button>
             {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
           </Box>
         )}
         <Box
-          flexGrow="1"
           padding={4}
           color="white"
           display="flex"
+          maxHeight={"calc(100vh - 130px)"}
+          overflow="hidden auto"
+          width="100%"
           justifyContent="center"
         >
           <Routes>
@@ -183,8 +212,16 @@ function App() {
             <Route path="/useBalance" element={<UseBalancePage />} />
             <Route path="/useBlockNumber" element={<UseBlockNumberPage />} />
             <Route path="/useDisconnect" element={<UseDisconnectPage />} />
+            <Route
+              path="/useContractReadPage"
+              element={<UseContractReadPage />}
+            />
+            <Route path="/useSwitchNetwork" element={<UseSwitchNetwork />} />
+            <Route path="/useTransaction" element={<UseTransaction />} />
+            <Route path="/useConnectModal" element={<UseOpenConnectModal />} />
+            <Route path="/useAccountModal" element={<UseOpenAccountModal />} />
+            <Route path="/useChainModal" element={<UseOpenChainModal />} />
           </Routes>
-          {/* <RouterProvider router={router} /> */}
         </Box>
       </Box>
     </Box>

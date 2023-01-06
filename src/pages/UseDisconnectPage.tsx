@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { wagmi } from "asteroidkit";
 
 export const UseDisconnectPage = () => {

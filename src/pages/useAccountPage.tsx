@@ -1,9 +1,7 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { wagmi } from "asteroidkit";
-import { useState } from "react";
 
 export const UseAccountPage = () => {
-  const [message, setMessage] = useState("");
   const { address, isConnected, isConnecting, isDisconnected } =
     wagmi.useAccount();
 
