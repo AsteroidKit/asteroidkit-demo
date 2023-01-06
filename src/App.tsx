@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { rainbowkit, wagmi } from "asteroidkit";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import AsteroidIcon from "./assets/asteroid.svg";
@@ -17,14 +17,14 @@ import { SignMessagePage } from "./pages/SignMessagePage";
 import { UseAccountPage } from "./pages/useAccountPage";
 import { UseBalancePage } from "./pages/useBalancePage";
 import { UseBlockNumberPage } from "./pages/UseBlockNumberPage";
-import { UseDisconnectPage } from "./pages/UseDisconnectPage";
-import { WelcomePage } from "./pages/WelcomePage";
 import { UseContractReadPage } from "./pages/UseContractReadPage";
-import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
-import { UseTransaction } from "./pages/UseTransaction";
-import { UseOpenConnectModal } from "./pages/UseOpenConnectModalPage";
+import { UseDisconnectPage } from "./pages/UseDisconnectPage";
 import { UseOpenAccountModal } from "./pages/UseOpenAccountModalPage";
 import { UseOpenChainModal } from "./pages/UseOpenChainModalPage";
+import { UseOpenConnectModal } from "./pages/UseOpenConnectModalPage";
+import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
+import { UseTransaction } from "./pages/UseTransaction";
+import { WelcomePage } from "./pages/WelcomePage";
 
 const upAndDown = keyframes`
   from {
@@ -37,6 +37,7 @@ const upAndDown = keyframes`
 
 function App() {
   const { address, isConnected, isDisconnected } = wagmi.useAccount();
+  const { pathname } = useLocation();
 
   return (
     <Box
@@ -97,6 +98,7 @@ function App() {
             <Button
               component={Link}
               to="./useSignMessage"
+              disabled={pathname === "/useSignMessage"}
               size="small"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -106,6 +108,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useAccount"}
               to="./useAccount"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -115,6 +118,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useBalance"}
               to="./useBalance"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -124,6 +128,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useBlockNumber"}
               to="./useBlockNumber"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -133,6 +138,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useDisconnect"}
               to="./useDisconnect"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -142,6 +148,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useContractReadPage"}
               to="./useContractReadPage"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -151,6 +158,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useSwitchNetwork"}
               to="./useSwitchNetwork"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -160,6 +168,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useTransaction"}
               to="./useTransaction"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -169,6 +178,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useConnectModal"}
               to="./useConnectModal"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -178,6 +188,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useAccountModal"}
               to="./useAccountModal"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -187,6 +198,7 @@ function App() {
             <Button
               size="small"
               component={Link}
+              disabled={pathname === "/useChainModal"}
               to="./useChainModal"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
@@ -203,6 +215,7 @@ function App() {
           maxHeight={"calc(100vh - 130px)"}
           overflow="hidden auto"
           width="100%"
+          maxWidth={"100%"}
           justifyContent="center"
         >
           <Routes>
