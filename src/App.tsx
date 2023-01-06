@@ -9,7 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { rainbowkit, wagmi } from "asteroidkit";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Link,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import AsteroidIcon from "./assets/asteroid.svg";
@@ -116,16 +122,18 @@ function App() {
           >
             {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
             <Button
+              component={Link}
+              to="./useSignMessage"
               size="small"
-              href="./useSignMessage"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
             >
               useSignMessage
             </Button>
             <Button
-              href="./useAccount"
               size="small"
+              component={Link}
+              to="./useAccount"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
             >
@@ -133,7 +141,8 @@ function App() {
             </Button>
             <Button
               size="small"
-              href="./useBalance"
+              component={Link}
+              to="./useBalance"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
             >
@@ -141,7 +150,8 @@ function App() {
             </Button>
             <Button
               size="small"
-              href="./useBlockNumber"
+              component={Link}
+              to="./useBlockNumber"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
             >
@@ -149,7 +159,8 @@ function App() {
             </Button>
             <Button
               size="small"
-              href="./useDisconnect"
+              component={Link}
+              to="./useDisconnect"
               variant="text"
               sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
             >
@@ -165,7 +176,15 @@ function App() {
           display="flex"
           justifyContent="center"
         >
-          <RouterProvider router={router} />
+          <Routes>
+            <Route index element={<WelcomePage />} />
+            <Route path="/useSignMessage" element={<SignMessagePage />} />
+            <Route path="/useAccount" element={<UseAccountPage />} />
+            <Route path="/useBalance" element={<UseBalancePage />} />
+            <Route path="/useBlockNumber" element={<UseBlockNumberPage />} />
+            <Route path="/useDisconnect" element={<UseDisconnectPage />} />
+          </Routes>
+          {/* <RouterProvider router={router} /> */}
         </Box>
       </Box>
     </Box>
