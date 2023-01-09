@@ -14,9 +14,7 @@ export const UseOpenConnectModal = () => {
           </Typography>
         )}
         {!!openConnectModal && (
-          <Button variant="outlined" onClick={() => openConnectModal()}>
-            Open Connect Modal
-          </Button>
+          <Button onClick={() => openConnectModal()}>Open Connect Modal</Button>
         )}
       </Box>
     </Box>

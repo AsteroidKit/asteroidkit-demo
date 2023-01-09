@@ -35,6 +35,20 @@ const upAndDown = keyframes`
   }
 `;
 
+const navList = [
+  { path: "useSignMessage", component: <SignMessagePage /> },
+  { path: "useAccount", component: <UseAccountPage /> },
+  { path: "useBalance", component: <UseBalancePage /> },
+  { path: "useBlockNumber", component: <UseBlockNumberPage /> },
+  { path: "useDisconnect", component: <UseDisconnectPage /> },
+  { path: "useContractReadPage", component: <UseContractReadPage /> },
+  { path: "useSwitchNetwork", component: <UseSwitchNetwork /> },
+  { path: "useTransaction", component: <UseTransaction /> },
+  { path: "useConnectModal", component: <UseOpenConnectModal /> },
+  { path: "useAccountModal", component: <UseOpenAccountModal /> },
+  { path: "useChainModal", component: <UseOpenChainModal /> },
+];
+
 function App() {
   const { address, isConnected, isDisconnected } = wagmi.useAccount();
   const { pathname } = useLocation();
@@ -94,118 +108,19 @@ function App() {
             flexDirection={"column"}
             gap={1}
           >
-            {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
-            <Button
-              component={Link}
-              to="./useSignMessage"
-              disabled={pathname === "/useSignMessage"}
-              size="small"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useSignMessage
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useAccount"}
-              to="./useAccount"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useAccount
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useBalance"}
-              to="./useBalance"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useBalance
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useBlockNumber"}
-              to="./useBlockNumber"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useBlocknumber
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useDisconnect"}
-              to="./useDisconnect"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useDisconnect
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useContractReadPage"}
-              to="./useContractReadPage"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useContractReadPage
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useSwitchNetwork"}
-              to="./useSwitchNetwork"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useSwitchNetwork
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useTransaction"}
-              to="./useTransaction"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useTransaction
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useConnectModal"}
-              to="./useConnectModal"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useConnectModal
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useAccountModal"}
-              to="./useAccountModal"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useAccountModal
-            </Button>
-            <Button
-              size="small"
-              component={Link}
-              disabled={pathname === "/useChainModal"}
-              to="./useChainModal"
-              variant="text"
-              sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-            >
-              useChainModal
-            </Button>
-            {/* <Box sx={{ borderBottom: "1px solid white", margin: "6px 0" }} /> */}
+            {navList.map((item) => (
+              <Button
+                key={item.path}
+                component={Link}
+                to={`./${item.path}`}
+                disabled={pathname === `/${item.path}`}
+                size="small"
+                variant="text"
+                sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+              >
+                {item.path}
+              </Button>
+            ))}
           </Box>
         )}
         <Box
@@ -215,25 +130,14 @@ function App() {
           maxHeight={"calc(100vh - 130px)"}
           overflow="hidden auto"
           width="100%"
-          maxWidth={"100%"}
+          maxWidth={"calc(100% - 150px"}
           justifyContent="center"
         >
           <Routes>
             <Route index element={<WelcomePage />} />
-            <Route path="/useSignMessage" element={<SignMessagePage />} />
-            <Route path="/useAccount" element={<UseAccountPage />} />
-            <Route path="/useBalance" element={<UseBalancePage />} />
-            <Route path="/useBlockNumber" element={<UseBlockNumberPage />} />
-            <Route path="/useDisconnect" element={<UseDisconnectPage />} />
-            <Route
-              path="/useContractReadPage"
-              element={<UseContractReadPage />}
-            />
-            <Route path="/useSwitchNetwork" element={<UseSwitchNetwork />} />
-            <Route path="/useTransaction" element={<UseTransaction />} />
-            <Route path="/useConnectModal" element={<UseOpenConnectModal />} />
-            <Route path="/useAccountModal" element={<UseOpenAccountModal />} />
-            <Route path="/useChainModal" element={<UseOpenChainModal />} />
+            {navList.map((item) => (
+              <Route path={`/${item.path}`} element={item.component} />
+            ))}
           </Routes>
         </Box>
       </Box>

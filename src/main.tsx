@@ -15,6 +15,18 @@ const theme: Theme = createTheme({
       main: "#B183ED",
     },
   },
+  components: {
+    MuiTextField: {
+      defaultProps: {
+        variant: "filled",
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: "outlined",
+      },
+    },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

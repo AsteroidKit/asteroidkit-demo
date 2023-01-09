@@ -1531,10 +1531,10 @@ asap@~2.0.3:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
-asteroidkit@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/asteroidkit/-/asteroidkit-0.0.6.tgz#896bd9ab4d7feb5f6f7d3d83abfd28f233b50bca"
-  integrity sha512-qfKJJnWKUumGUJwTmu/j2yJywnwV2sFhECg4ER3dzfABIuuir+Rb3OvneSYjD2NW5n/HYbo6fKf2Jf1uc9grsA==
+asteroidkit@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/asteroidkit/-/asteroidkit-0.0.7.tgz#9197e53a806d96873e1379e84f3bc0fe91345f9a"
+  integrity sha512-x5+VL4Gw4oJsQ2PRKZZQqPXcLjDlchUKdf0C0JvZaRu8Tnh3bXXaY6VGa0J1MTERUQ04bL6KVDk31iiGPDtaLg==
   dependencies:
     "@rainbow-me/rainbowkit" "^0.8.1"
     ethers "^5.5.1"

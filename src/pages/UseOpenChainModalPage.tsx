@@ -14,9 +14,7 @@ export const UseOpenChainModal = () => {
           </Typography>
         )}
         {!!openChainModal && (
-          <Button variant="outlined" onClick={() => openChainModal()}>
-            Open Chain Modal
-          </Button>
+          <Button onClick={() => openChainModal()}>Open Chain Modal</Button>
         )}
       </Box>
     </Box>

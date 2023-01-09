@@ -16,7 +16,6 @@ export const SignMessagePage = () => {
           Type a message to be signed
         </Typography>
         <TextField
-          variant="outlined"
           label="Message"
           rows={5}
           value={message}
@@ -46,11 +45,7 @@ export const SignMessagePage = () => {
             </Box>
           )}
         </Box>
-        <Button
-          variant="outlined"
-          onClick={() => signMessage()}
-          disabled={!message.length}
-        >
+        <Button onClick={() => signMessage()} disabled={!message.length}>
           Sign
         </Button>
       </Box>

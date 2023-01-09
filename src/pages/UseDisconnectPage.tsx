@@ -14,7 +14,6 @@ export const UseDisconnectPage = () => {
           isLoading: {String(isLoading)}
         </Typography>
         <Button
-          variant="outlined"
           onClick={() => {
             disconnect();
           }}

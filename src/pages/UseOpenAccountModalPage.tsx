@@ -14,9 +14,7 @@ export const UseOpenAccountModal = () => {
           </Typography>
         )}
         {!!openAccountModal && (
-          <Button variant="outlined" onClick={() => openAccountModal()}>
-            Open Account Modal
-          </Button>
+          <Button onClick={() => openAccountModal()}>Open Account Modal</Button>
         )}
       </Box>
     </Box>

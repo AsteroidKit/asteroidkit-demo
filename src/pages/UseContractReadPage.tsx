@@ -8,11 +8,12 @@ export const UseContractReadPage = () => {
     "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
   );
   const [callArguments, setCallArguments] = useState("");
+  const [methodName, setMethodName] = useState("decimals");
 
   const { data, isError, error, isLoading } = wagmi.useContractRead({
     address: contractAddress,
     abi: ERC20ABI,
-    functionName: "decimals",
+    functionName: methodName,
     args: callArguments.trim().length ? callArguments.split(";") : [],
   });
 
@@ -20,14 +21,19 @@ export const UseContractReadPage = () => {
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
       <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
         <TextField
-          variant="outlined"
           label="Contract Addresss"
           value={contractAddress}
           onChange={(e) => setContractAddress(e.target.value)}
           fullWidth
         />
         <TextField
-          variant="outlined"
+          label="Method Name"
+          placeholder="decimals"
+          value={methodName}
+          onChange={(e) => setMethodName(e.target.value)}
+          fullWidth
+        />
+        <TextField
           label="Arguments (separated by `;`)"
           placeholder="argA;argB"
           value={callArguments}

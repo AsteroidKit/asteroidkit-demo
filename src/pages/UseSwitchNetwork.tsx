@@ -25,7 +25,6 @@ export const UseSwitchNetwork = () => {
         {chains.map((x) => (
           <Button
             key={x.id}
-            variant="outlined"
             disabled={!switchNetwork || x.id === chain?.id}
             onClick={() => switchNetwork?.(x.id)}
           >

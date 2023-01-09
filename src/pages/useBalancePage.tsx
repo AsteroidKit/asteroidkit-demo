@@ -12,9 +12,10 @@ export const UseBalancePage = () => {
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
       <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
         <TextField
-          variant="outlined"
+          variant="filled"
           label="Address"
           value={address}
+          // color="warning"
           onChange={(e) => setAddress(e.target.value)}
           fullWidth
         />
