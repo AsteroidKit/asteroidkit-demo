@@ -54,6 +54,9 @@ export const UseTransaction = () => {
           flexGrow={1}
           maxWidth="calc(100% - 150px)"
         >
+          <Typography variant="h4">
+            Hook for fetching transaction by hash
+          </Typography>
           <Typography variant="h6" component="div">
             isLoading: {String(isLoading)}
           </Typography>

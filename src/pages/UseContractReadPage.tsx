@@ -4,11 +4,6 @@ import { useEffect, useRef } from "react";
 import { useState } from "react";
 import ERC20ABI from "../ERC20ABI.json";
 
-const defaultHashs: any = {
-  Ethereum: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-  Polygon: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
-};
-
 export const UseContractReadPage = () => {
   const [contractAddress, setContractAddress] = useState(
     "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
@@ -63,6 +58,9 @@ export const UseContractReadPage = () => {
         maxWidth={1256}
       >
         <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
+          <Typography variant="h4">
+            Hook for calling an ethers Contract read-only method
+          </Typography>
           <Typography variant="h6" component="div">
             isError: {String(isError)}
           </Typography>

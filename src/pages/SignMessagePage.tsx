@@ -14,6 +14,9 @@ export const SignMessagePage = () => {
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
       <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
+        <Typography variant="h4">
+          Hook for signing messages with connected account.
+        </Typography>
         <Typography variant="h5" component="div">
           Type a message to be signed
         </Typography>
