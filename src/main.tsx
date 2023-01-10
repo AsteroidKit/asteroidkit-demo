@@ -9,6 +9,7 @@ import { createTheme, Theme, ThemeProvider } from "@mui/material";
 const theme: Theme = createTheme({
   palette: {
     mode: "dark",
+
     primary: {
       main: "#B183ED",
     },
@@ -23,6 +24,11 @@ const theme: Theme = createTheme({
       },
     },
     MuiButton: {
+      styleOverrides: {
+        contained: {
+          color: "white",
+        },
+      },
       defaultProps: {
         variant: "contained",
       },

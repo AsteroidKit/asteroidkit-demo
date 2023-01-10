@@ -31,6 +31,7 @@ import { UseOpenConnectModal } from "./pages/UseOpenConnectModalPage";
 import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
 import { UseTransaction } from "./pages/UseTransaction";
 import { WelcomePage } from "./pages/WelcomePage";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const upAndDown = keyframes`
   from {
@@ -42,7 +43,10 @@ const upAndDown = keyframes`
 `;
 
 const navListWagmi = [
-  { path: "useSignMessage", component: <SignMessagePage /> },
+  {
+    path: "useSignMessage",
+    component: <SignMessagePage />,
+  },
   { path: "useAccount", component: <UseAccountPage /> },
   { path: "useBalance", component: <UseBalancePage /> },
   { path: "useBlockNumber", component: <UseBlockNumberPage /> },
@@ -124,21 +128,19 @@ function App() {
             flexDirection={"column"}
             gap={1}
           >
-            {/* <Box paddingTop="12px"> */}
             <Typography
-              color="white"
+              color="#b4b4b4"
               textAlign="center"
               sx={{
                 fontSize: "14px",
                 padding: "8px",
-                fontWeight: "700",
-                borderBottom: "1px solid",
+                fontWeight: "300",
+                borderBottom: "0.5px solid #9b9b9b",
                 margin: "0 -12px",
               }}
             >
               Wagmi Hooks
             </Typography>
-            {/* </Box> */}
             {navListWagmi.map((item) => (
               <Button
                 key={item.path}
@@ -154,13 +156,13 @@ function App() {
             ))}
             {/* <Box paddingTop="12px"> */}
             <Typography
-              color="white"
+              color="#b4b4b4"
               textAlign="center"
               sx={{
                 fontSize: "14px",
                 padding: "8px",
-                fontWeight: "700",
-                borderBottom: "1px solid",
+                fontWeight: "300",
+                borderBottom: "0.5px solid #9b9b9b",
                 marginLeft: "-12px",
                 marginTop: 3,
                 marginRight: "-12px",
@@ -201,14 +203,14 @@ function App() {
               <Route
                 key={item.path}
                 path={`/${item.path}`}
-                element={item.component}
+                element={<ProtectedRoute>{item.component}</ProtectedRoute>}
               />
             ))}
             {navListRainbowkit.map((item) => (
               <Route
                 key={item.path}
                 path={`/${item.path}`}
-                element={item.component}
+                element={<ProtectedRoute>{item.component}</ProtectedRoute>}
               />
             ))}
           </Routes>
