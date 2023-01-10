@@ -1,6 +1,6 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { wagmi } from "asteroidkit";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactJson from "react-json-view";
 
 const defaultHashs: any = {
@@ -11,45 +11,74 @@ const defaultHashs: any = {
 
 export const UseTransaction = () => {
   const network = wagmi.useNetwork();
+  const previousNetwork = useRef("");
 
-  const [transactionHash, setTransactionHash] = useState(
-    "0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060"
-  );
+  const [transactionHash, setTransactionHash] = useState("");
+
+  const [submitedTransactionHash, setSubmitedTransactionHash] = useState("");
 
   useEffect(() => {
-    if (network.chain?.name) {
+    if (
+      network.chain?.name &&
+      network.chain?.name !== previousNetwork.current
+    ) {
       setTransactionHash(defaultHashs[network.chain.name]);
+      setSubmitedTransactionHash(defaultHashs[network.chain.name]);
+      previousNetwork.current = network.chain?.name;
     }
   }, [network]);
 
   const { data, error, isLoading } = wagmi.useTransaction({
-    hash: transactionHash as any,
+    hash: submitedTransactionHash as any,
   });
 
   return (
-    <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
-      <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
-        <TextField
-          label="Transaction Hash"
-          placeholder="0x"
-          value={transactionHash}
-          onChange={(e) => setTransactionHash(e.target.value)}
-          fullWidth
-        />
-        <Typography variant="h6" component="div">
-          isLoading: {String(isLoading)}
-        </Typography>
-        {error && (
+    <form
+      style={{ flexGrow: 1 }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSubmitedTransactionHash(transactionHash);
+      }}
+    >
+      <Box
+        display="flex"
+        flexGrow="1"
+        padding={4}
+        color="white"
+        maxWidth={1256}
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          gap={2}
+          flexGrow={1}
+          maxWidth="calc(100% - 150px)"
+        >
           <Typography variant="h6" component="div">
-            {String(error)}
+            isLoading: {String(isLoading)}
           </Typography>
-        )}
-        {!!data && (
-          <Box bgcolor="#b0b6ff" padding={3} borderRadius={2}>
-            <ReactJson src={data} />
-          </Box>
-        )}
+          {error && (
+            <Typography variant="h6" component="div">
+              {String(error)}
+            </Typography>
+          )}
+          {!!data && (
+            <Box bgcolor="#b0b6ff" padding={3} borderRadius={2}>
+              <ReactJson src={data} collapsed />
+            </Box>
+          )}
+          <TextField
+            label="Transaction Hash"
+            placeholder="0x"
+            value={transactionHash}
+            onChange={(e) => setTransactionHash(e.target.value)}
+            fullWidth
+          />
+          <Button onClick={() => setSubmitedTransactionHash(transactionHash)}>
+            Get Transaction Info
+          </Button>
+        </Box>
       </Box>
-    </Box>
+    </form>
   );
 };

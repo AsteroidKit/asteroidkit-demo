@@ -1,7 +1,13 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { wagmi } from "asteroidkit";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import ERC20ABI from "../ERC20ABI.json";
+
+const defaultHashs: any = {
+  Ethereum: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+  Polygon: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+};
 
 export const UseContractReadPage = () => {
   const [contractAddress, setContractAddress] = useState(
@@ -10,51 +16,90 @@ export const UseContractReadPage = () => {
   const [callArguments, setCallArguments] = useState("");
   const [methodName, setMethodName] = useState("decimals");
 
+  const [submitedContractAddress, setSubmitedContractAddress] = useState(
+    "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+  );
+  const [submitedCallArguments, setSubmitedCallArguments] = useState("");
+
+  const [submitedMethodName, setSubmitedMethodName] = useState("decimals");
+
+  const previousNetwork = useRef("");
+
+  const network = wagmi.useNetwork();
+
   const { data, isError, error, isLoading } = wagmi.useContractRead({
-    address: contractAddress,
+    address: submitedContractAddress,
     abi: ERC20ABI,
-    functionName: methodName,
-    args: callArguments.trim().length ? callArguments.split(";") : [],
+    functionName: submitedMethodName,
+    args: submitedCallArguments.trim().length
+      ? submitedCallArguments.split(";")
+      : [],
   });
 
+  useEffect(() => {
+    if (
+      network.chain?.name &&
+      network.chain?.name !== previousNetwork.current
+    ) {
+    }
+  }, []);
+
   return (
-    <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
-      <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
-        <TextField
-          label="Contract Addresss"
-          value={contractAddress}
-          onChange={(e) => setContractAddress(e.target.value)}
-          fullWidth
-        />
-        <TextField
-          label="Method Name"
-          placeholder="decimals"
-          value={methodName}
-          onChange={(e) => setMethodName(e.target.value)}
-          fullWidth
-        />
-        <TextField
-          label="Arguments (separated by `;`)"
-          placeholder="argA;argB"
-          value={callArguments}
-          onChange={(e) => setCallArguments(e.target.value)}
-          fullWidth
-        />
-        <Typography variant="h6" component="div">
-          isError: {String(isError)}
-        </Typography>
-        {error && (
+    <form
+      style={{ flexGrow: 1 }}
+      onSubmit={(e) => {
+        e.preventDefault();
+
+        setSubmitedContractAddress(contractAddress);
+        setSubmitedCallArguments(callArguments);
+        setSubmitedMethodName(methodName);
+      }}
+    >
+      <Box
+        flexGrow={1}
+        display="flex"
+        padding={4}
+        color="white"
+        maxWidth={1256}
+      >
+        <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
           <Typography variant="h6" component="div">
-            {String(error)}
+            isError: {String(isError)}
           </Typography>
-        )}
-        <Typography variant="h6" component="div">
-          isLoading: {String(isLoading)}
-        </Typography>
-        <Typography variant="h6" component="div">
-          Data: {String(data)}
-        </Typography>
+          {error && (
+            <Typography variant="h6" component="div">
+              {String(error)}
+            </Typography>
+          )}
+          <Typography variant="h6" component="div">
+            isLoading: {String(isLoading)}
+          </Typography>
+          <Typography variant="h6" component="div">
+            Data: {String(data)}
+          </Typography>
+          <TextField
+            label="Contract Addresss"
+            value={contractAddress}
+            onChange={(e) => setContractAddress(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Method Name"
+            placeholder="decimals"
+            value={methodName}
+            onChange={(e) => setMethodName(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Arguments (separated by `;`)"
+            placeholder="argA;argB"
+            value={callArguments}
+            onChange={(e) => setCallArguments(e.target.value)}
+            fullWidth
+          />
+          <Button type="submit">Call Contract Method</Button>
+        </Box>
       </Box>
-    </Box>
+    </form>
   );
 };

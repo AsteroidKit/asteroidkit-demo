@@ -41,7 +41,7 @@ const upAndDown = keyframes`
   }
 `;
 
-const navList = [
+const navListWagmi = [
   { path: "useSignMessage", component: <SignMessagePage /> },
   { path: "useAccount", component: <UseAccountPage /> },
   { path: "useBalance", component: <UseBalancePage /> },
@@ -50,6 +50,9 @@ const navList = [
   { path: "useContractReadPage", component: <UseContractReadPage /> },
   { path: "useSwitchNetwork", component: <UseSwitchNetwork /> },
   { path: "useTransaction", component: <UseTransaction /> },
+];
+
+const navListRainbowkit = [
   // { path: "useConnectModal", component: <UseOpenConnectModal /> },
   { path: "useAccountModal", component: <UseOpenAccountModal /> },
   { path: "useChainModal", component: <UseOpenChainModal /> },
@@ -70,7 +73,7 @@ function App() {
       <AppBar
         sx={{
           background:
-            "linear-gradient(148deg, rgba(191,112,238,1) 0%, rgba(103,206,236,1) 100%)",
+            "linear-gradient(148deg, rgba(191,112,238,1) 0%, #298cab 100%)",
         }}
         position="relative"
       >
@@ -112,7 +115,7 @@ function App() {
             width="150px"
             minWidth={150}
             sx={{
-              bgcolor: "#bc74ee78",
+              bgcolor: "#353236",
             }}
             boxShadow="0px 3px 14px 9px rgba(0, 0, 0, 0.2)"
             padding="64px 12px"
@@ -121,7 +124,53 @@ function App() {
             flexDirection={"column"}
             gap={1}
           >
-            {navList.map((item) => (
+            {/* <Box paddingTop="12px"> */}
+            <Typography
+              color="white"
+              textAlign="center"
+              sx={{
+                fontSize: "14px",
+                padding: "8px",
+                fontWeight: "700",
+                borderBottom: "1px solid",
+                margin: "0 -12px",
+              }}
+            >
+              Wagmi Hooks
+            </Typography>
+            {/* </Box> */}
+            {navListWagmi.map((item) => (
+              <Button
+                key={item.path}
+                component={ReactRouterLink}
+                to={`./${item.path}`}
+                disabled={pathname === `/${item.path}`}
+                size="small"
+                variant="text"
+                sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
+              >
+                {item.path}
+              </Button>
+            ))}
+            {/* <Box paddingTop="12px"> */}
+            <Typography
+              color="white"
+              textAlign="center"
+              sx={{
+                fontSize: "14px",
+                padding: "8px",
+                fontWeight: "700",
+                borderBottom: "1px solid",
+                marginLeft: "-12px",
+                marginTop: 3,
+                marginRight: "-12px",
+              }}
+            >
+              Rainbowkit Hooks
+            </Typography>
+            {/* </Box> */}
+
+            {navListRainbowkit.map((item) => (
               <Button
                 key={item.path}
                 component={ReactRouterLink}
@@ -148,8 +197,19 @@ function App() {
         >
           <Routes>
             <Route index element={<WelcomePage />} />
-            {navList.map((item) => (
-              <Route path={`/${item.path}`} element={item.component} />
+            {navListWagmi.map((item) => (
+              <Route
+                key={item.path}
+                path={`/${item.path}`}
+                element={item.component}
+              />
+            ))}
+            {navListRainbowkit.map((item) => (
+              <Route
+                key={item.path}
+                path={`/${item.path}`}
+                element={item.component}
+              />
             ))}
           </Routes>
         </Box>

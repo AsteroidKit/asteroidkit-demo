@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { wagmi } from "asteroidkit";
 
 export const UseBlockNumberPage = () => {
-  const { data, isError, isLoading } = wagmi.useBlockNumber();
+  const { data, refetch, isError, isLoading } = wagmi.useBlockNumber();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>
@@ -16,6 +16,13 @@ export const UseBlockNumberPage = () => {
         <Typography variant="h6" component="div">
           Blocknumber: {data}
         </Typography>
+        <Button
+          onClick={() => {
+            refetch();
+          }}
+        >
+          Get Block Number
+        </Button>
       </Box>
     </Box>
   );

@@ -8,11 +8,12 @@ import { createTheme, Theme, ThemeProvider } from "@mui/material";
 
 const theme: Theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
-      main: "#ffffff",
+      main: "#B183ED",
     },
     secondary: {
-      main: "#B183ED",
+      main: "#4fadd6",
     },
   },
   components: {
@@ -23,7 +24,7 @@ const theme: Theme = createTheme({
     },
     MuiButton: {
       defaultProps: {
-        variant: "outlined",
+        variant: "contained",
       },
     },
   },

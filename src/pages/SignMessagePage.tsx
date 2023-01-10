@@ -3,7 +3,9 @@ import { wagmi } from "asteroidkit";
 import { useState } from "react";
 
 export const SignMessagePage = () => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(
+    "This is a sample message from AsteroidKit"
+  );
   const { data, isError, isLoading, isSuccess, error, signMessage } =
     wagmi.useSignMessage({
       message: message,
