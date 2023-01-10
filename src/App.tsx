@@ -5,11 +5,17 @@ import {
   Box,
   Button,
   keyframes,
+  Link as MuiLink,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { rainbowkit, wagmi } from "asteroidkit";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Link as ReactRouterLink,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import AsteroidIcon from "./assets/asteroid.svg";
@@ -44,7 +50,7 @@ const navList = [
   { path: "useContractReadPage", component: <UseContractReadPage /> },
   { path: "useSwitchNetwork", component: <UseSwitchNetwork /> },
   { path: "useTransaction", component: <UseTransaction /> },
-  { path: "useConnectModal", component: <UseOpenConnectModal /> },
+  // { path: "useConnectModal", component: <UseOpenConnectModal /> },
   { path: "useAccountModal", component: <UseOpenAccountModal /> },
   { path: "useChainModal", component: <UseOpenChainModal /> },
 ];
@@ -69,14 +75,21 @@ function App() {
         position="relative"
       >
         <Toolbar>
-          <img src={AsteroidIcon} alt="AsteroidKit icon" height={30} />
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{ flexGrow: 1, paddingLeft: "4px", color: "white" }}
-          >
-            AsteroidKit
-          </Typography>
+          <Box display="flex" flexGrow={1} alignItems="center">
+            <MuiLink href="https://www.asteroidkit.com/" underline="none">
+              <Box display="flex" alignItems="center">
+                <img src={AsteroidIcon} alt="AsteroidKit icon" height={30} />
+
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{ flexGrow: 1, paddingLeft: "4px", color: "white" }}
+                >
+                  AsteroidKit
+                </Typography>
+              </Box>
+            </MuiLink>
+          </Box>
           <Box position="relative">
             <rainbowkit.ConnectButton />
             {isDisconnected && (
@@ -111,7 +124,7 @@ function App() {
             {navList.map((item) => (
               <Button
                 key={item.path}
-                component={Link}
+                component={ReactRouterLink}
                 to={`./${item.path}`}
                 disabled={pathname === `/${item.path}`}
                 size="small"
