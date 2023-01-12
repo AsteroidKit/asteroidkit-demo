@@ -6,8 +6,8 @@ import { NgmiPolyfill } from "vite-plugin-ngmi-polyfill";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vitePluginFaviconsInject("./src/assets/asteroid.svg"),
     NgmiPolyfill(),
+    vitePluginFaviconsInject("./src/assets/asteroid.svg"),
     react(),
   ],
   define: { global: "window" },
