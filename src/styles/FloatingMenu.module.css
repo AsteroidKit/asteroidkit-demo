@@ -1,0 +1,84 @@
+.floatingMenuWrapper {
+    position: absolute;
+    top: 400px;
+    right: 0px;
+    z-index: 2147483646999;
+    color: #FFFFFF;
+    background-color: #2F2F2F;
+    padding: 0px 23px;
+    border-radius: 20px 0px 0px 20px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.floatingSubitemTitle {
+    display: block;
+    padding-bottom: 20px;
+    font-weight: 500;
+}
+
+.floatingSubitemTitle:first-of-type {
+    padding-top: 32px;
+}
+
+.floatingSubitemContainer {
+    margin-bottom: 36px;
+}
+
+.floatingSubitemContainer:last-of-type {
+    margin-bottom: 28px;
+}
+
+.insideButtonHover {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.insideButton {
+    position: relative;
+    margin-top: 10px;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+    border: 0px;
+    margin-right: 10px;
+}
+
+.insideButton > img {
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+    -o-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.insideButton > img:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.floatingSubitemToggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.floatingSubitemToggle:last-of-type {
+    margin-bottom: 0px;
+}
+
+.floatingSubitemToggle > span {
+    padding-left: 10px;
+}
+
+.floatingSubitemContainerImages {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}

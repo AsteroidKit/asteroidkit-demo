@@ -32,6 +32,8 @@ import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
 import { UseTransaction } from "./pages/UseTransaction";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { useEffect } from "react";
+import { useFloatingMenuState } from "./components/FloatingMenuProvider/FloatingMenuProvider";
 
 const upAndDown = keyframes`
   from {
@@ -66,6 +68,8 @@ function App() {
   const { address, isConnected, isDisconnected } = wagmi.useAccount();
   const { pathname } = useLocation();
 
+  const { visible, setVisible } = useFloatingMenuState();
+
   return (
     <Box
       width="100vw"
@@ -99,6 +103,17 @@ function App() {
           </Box>
           <Box position="relative">
             <rainbowkit.ConnectButton />
+
+            <rainbowkit.ConnectButton.Custom>
+            {({
+              connectModalOpen
+            }: any) => {
+              useEffect(() => {
+                setVisible(connectModalOpen)
+              }, [connectModalOpen])
+            }}
+            </rainbowkit.ConnectButton.Custom>
+
             {isDisconnected && (
               <ArrowUpwardIcon
                 fontSize="large"
