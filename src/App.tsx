@@ -107,13 +107,13 @@ function App() {
             <ConnectButton />
 
             <ConnectButton.Custom>
-            {({
-              connectModalOpen
-            }: any) => {
-              useEffect(() => {
-                setVisible(connectModalOpen)
-              }, [connectModalOpen])
-            }}
+              {({ connectModalOpen }: any) => {
+                useEffect(() => {
+                  setVisible(connectModalOpen);
+                }, [connectModalOpen]);
+
+                return <></>;
+              }}
             </ConnectButton.Custom>
             {isDisconnected && (
               <ArrowUpwardIcon
