@@ -1,14 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useBalance, useAccount } from "wagmi";
 import { useEffect, useRef, useState } from "react";
 
 export const UseBalancePage = () => {
   const [address, setAddress] = useState("");
   const initialAccountSet = useRef(false);
   const [onGoingaddress, setOnGoingAddress] = useState("");
-  const account = wagmi.useAccount();
+  const account = useAccount();
 
-  const { data, isError, isLoading } = wagmi.useBalance({
+  const { data, isError, isLoading } = useBalance({
     address: address as any,
   });
 

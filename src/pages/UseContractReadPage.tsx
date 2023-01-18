@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useNetwork, useContractRead } from "wagmi";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import ERC20ABI from "../ERC20ABI.json";
@@ -20,10 +20,10 @@ export const UseContractReadPage = () => {
 
   const previousNetwork = useRef("");
 
-  const network = wagmi.useNetwork();
+  const network = useNetwork();
 
-  const { data, isError, error, isLoading } = wagmi.useContractRead({
-    address: submitedContractAddress,
+  const { data, isError, error, isLoading } = useContractRead({
+    address: submitedContractAddress as any,
     abi: ERC20ABI,
     functionName: submitedMethodName,
     args: submitedCallArguments.trim().length

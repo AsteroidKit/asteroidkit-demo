@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useDisconnect } from "wagmi";
 
 export const UseDisconnectPage = () => {
-  const { disconnect, isError, isLoading } = wagmi.useDisconnect();
+  const { disconnect, isError, isLoading } = useDisconnect();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

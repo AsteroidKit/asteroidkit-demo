@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useNetwork, useTransaction } from "wagmi";
 import { useEffect, useRef, useState } from "react";
 import ReactJson from "react-json-view";
 
@@ -10,7 +10,7 @@ const defaultHashs: any = {
 };
 
 export const UseTransaction = () => {
-  const network = wagmi.useNetwork();
+  const network = useNetwork();
   const previousNetwork = useRef("");
 
   const [transactionHash, setTransactionHash] = useState("");
@@ -28,7 +28,7 @@ export const UseTransaction = () => {
     }
   }, [network]);
 
-  const { data, error, isLoading } = wagmi.useTransaction({
+  const { data, error, isLoading } = useTransaction({
     hash: submitedTransactionHash as any,
   });
 

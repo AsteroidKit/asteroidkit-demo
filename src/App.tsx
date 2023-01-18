@@ -9,7 +9,9 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { rainbowkit, wagmi } from "asteroidkit";
+import { ConnectButton } from "asteroidkit";
+import { useAccount } from "wagmi";
+
 import {
   Link as ReactRouterLink,
   Route,
@@ -63,7 +65,7 @@ const navListRainbowkit = [
 ];
 
 function App() {
-  const { address, isConnected, isDisconnected } = wagmi.useAccount();
+  const { address, isConnected, isDisconnected } = useAccount();
   const { pathname } = useLocation();
 
   return (
@@ -98,7 +100,7 @@ function App() {
             </MuiLink>
           </Box>
           <Box position="relative">
-            <rainbowkit.ConnectButton />
+            <ConnectButton />
             {isDisconnected && (
               <ArrowUpwardIcon
                 fontSize="large"

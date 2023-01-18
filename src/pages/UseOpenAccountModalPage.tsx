@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { rainbowkit } from "asteroidkit";
+import { useAccountModal } from "asteroidkit";
 
 export const UseOpenAccountModal = () => {
-  const { openAccountModal } = rainbowkit.useAccountModal();
+  const { openAccountModal } = useAccountModal();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

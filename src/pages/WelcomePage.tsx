@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useAccount } from "wagmi";
 
 export const WelcomePage = () => {
-  const { address, isConnected, isDisconnected } = wagmi.useAccount();
+  const { address, isConnected, isDisconnected } = useAccount();
 
   if (isDisconnected) {
     return (

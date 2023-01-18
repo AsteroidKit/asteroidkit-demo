@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { rainbowkit } from "asteroidkit";
+import { useConnectModal } from "asteroidkit";
 
 export const UseOpenConnectModal = () => {
-  const { openConnectModal } = rainbowkit.useConnectModal();
+  const { openConnectModal } = useConnectModal();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

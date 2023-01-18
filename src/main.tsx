@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-import { AsteroidKitProvider } from "asteroidkit";
+import { AsteroidKitProvider, createClient } from "asteroidkit";
+
 import { createTheme, Theme, ThemeProvider } from "@mui/material";
+import { WagmiConfig } from "wagmi";
 
 const theme: Theme = createTheme({
   palette: {
@@ -36,13 +38,17 @@ const theme: Theme = createTheme({
   },
 });
 
+const client = createClient({ appId: "YOUR_APP_ID" });
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <AsteroidKitProvider>
-          <App />
-        </AsteroidKitProvider>
+        <WagmiConfig client={client}>
+          <AsteroidKitProvider>
+            <App />
+          </AsteroidKitProvider>
+        </WagmiConfig>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
