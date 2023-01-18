@@ -105,7 +105,6 @@ function App() {
           </Box>
           <Box position="relative">
             <ConnectButton />
-
             {!isConnected && (
               <ArrowUpwardIcon
                 fontSize="large"

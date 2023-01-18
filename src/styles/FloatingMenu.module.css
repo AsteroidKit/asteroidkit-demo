@@ -1,6 +1,7 @@
 .floatingMenuWrapper {
     position: absolute;
-    top: 400px;
+    top: 50%;
+    transform: translateY(-30%);
     right: 0px;
     z-index: 2147483646999;
     color: #FFFFFF;
