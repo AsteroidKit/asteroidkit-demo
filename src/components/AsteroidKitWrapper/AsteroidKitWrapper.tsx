@@ -1,7 +1,7 @@
 import { TryRounded } from "@mui/icons-material";
 import { create } from "@mui/material/styles/createTransitions";
 import { AsteroidKitProvider, createClient } from "asteroidkit";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { configureChains } from "wagmi";
 import { polygon , mainnet} from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
@@ -188,14 +188,83 @@ const getDemoTheme = (name: string) => {
     return lightTheme
 }
 
+const handleVisibiliyWallets = (wallets: any) => {
+    const el_metamask = document.querySelector('[data-testid="rk-wallet-option-metaMask"]');
+    const el_coinbase = document.querySelector('[data-testid="rk-wallet-option-coinbase"]');
+    const el_argent = document.querySelector('[data-testid="rk-wallet-option-argent"]');
+    const el_ledger = document.querySelector('[data-testid="rk-wallet-option-ledger"]');
+
+    const elements = {
+        'metamask': el_metamask,
+        'coinbase': el_coinbase,
+        'argent': el_argent,
+        'ledger': el_ledger,
+    } as any
+
+    for (let i = 0; i < wallets.length; i++) {
+        const wallet = wallets[i];
+
+        if(!elements[wallet.name]) continue;
+
+        if(wallet.enabled) {
+            elements[wallet.name].style.display = "block";
+        } else {
+            elements[wallet.name].style.display = "none";
+        }
+    }
+}
+
+const handleVisibiliySocial = (social: boolean) => {
+    let el_social = document.querySelector('[data-testid="rk-wallet-option-openlogin_google"]')?.parentElement?.parentElement;
+    let sibling = el_social?.previousSibling as HTMLElement;
+
+    if(!el_social) return null;
+
+    if(social) {
+        sibling.style.display = "block";
+        el_social.style.display = "block";
+    } else {
+        sibling.style.display = "none";
+        el_social.style.display = "none";
+    }
+}
+
+let global_social: boolean = false;
+let global_wallets: [];
+
+function handleFloatingMenu() {
+    let el = document.getElementById("rk_connect_title") as HTMLElement;
+    let floatingMenu = document.getElementById("floatingMenu") as HTMLElement;
+    
+    if(el) {
+        floatingMenu.style.display = "block";
+    } else {
+        floatingMenu.style.display = "none";
+    }
+}
+
+
+setInterval(() => {
+    handleVisibiliySocial(global_social);
+    handleVisibiliyWallets(global_wallets);
+    handleFloatingMenu();
+}, 100);
+
 export const AsteroidKitWrapper = ({ config }: AsteroidKitWrapperProps) => {
     const { color, siwe, wallets, social } = useFloatingMenuState();
 
-    const client = createClient({ 
-        appId: "YOUR_APP_ID", 
-        social,
-        wallets,
-    });
+    useEffect(() => {
+        global_social = social;
+        global_wallets = wallets;
+    }, [social, wallets])
+
+    const client = useMemo(() => {
+        return createClient({ 
+            appId: "YOUR_APP_ID", 
+            social: true,
+            wallets: wallets,
+        })
+    }, []);
 
     return (
         <WagmiConfig client={client}>
@@ -205,8 +274,7 @@ export const AsteroidKitWrapper = ({ config }: AsteroidKitWrapperProps) => {
                     enableSocial: social
                 }} 
                 theme={getDemoTheme(color)} 
-                modalSize="compact" 
-                appId="843088a1-bdd7-4dd8-b18f-4da6a1ce5070">
+                modalSize="compact">
                 <App />
             </AsteroidKitProvider>
         </WagmiConfig>

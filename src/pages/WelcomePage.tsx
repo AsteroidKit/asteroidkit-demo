@@ -2,9 +2,9 @@ import { Box, Typography } from "@mui/material";
 import { useAccount } from "wagmi";
 
 export const WelcomePage = () => {
-  const { address, isConnected, isDisconnected } = useAccount();
+  const { address, isConnected, isReconnecting, isDisconnected } = useAccount();
 
-  if (isDisconnected) {
+  if (!isConnected) {
     return (
       <Box
         display="flex"

@@ -25,5 +25,5 @@ export const FloatingMenuContext = createContext<FloatingMenuContextValue>({
     setSocial: () => {},
     wallets: {},
     setVisible: () => {},
-    visible: false,
+    visible: true,
 });

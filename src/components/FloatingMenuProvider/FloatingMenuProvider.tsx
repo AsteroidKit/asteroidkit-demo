@@ -19,28 +19,11 @@ type Props = {
     children: ReactNode;
 };
 
-const { chains, provider, webSocketProvider } = configureChains(
-    [
-      mainnet,
-      polygon,
-      optimism,
-      arbitrum
-    ],
-    [
-      alchemyProvider({
-        // This is Alchemy's default API key.
-        // You can get your own at https://dashboard.alchemyapi.io
-        apiKey: 'pZeNwDzPr46JgI5oGyuEoobufgMp2Co0',
-      }),
-      publicProvider(),
-    ]
-);
-
 const walletsDemo = [
-  { "name": "metamask", enabled: true, connector: metaMaskWallet({ chains }) },
-  { "name": "coinbase", enabled: true, connector: coinbaseWallet({ appName: "AsteroidKit Demo", chains }) },
-  { "name": "ledger", enabled: true, connector: ledgerWallet({ chains }) },
-  { "name": "argent", enabled: false, connector: argentWallet({ chains }) }
+  { "name": "metamask", enabled: true },
+  { "name": "coinbase", enabled: true },
+  { "name": "ledger", enabled: true },
+  { "name": "argent", enabled: false }
 ]
 
 function useFloatingMenuStateValue() {
@@ -49,7 +32,7 @@ function useFloatingMenuStateValue() {
     const [siwe, setSiwe] = useState(false);
     const [social, setSocial] = useState(false);
     const [wallets, setWallets] = useState(walletsDemo);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(true);
     
     return { 
         updateColor: (color: string) => setColor(color),
@@ -66,35 +49,11 @@ function useFloatingMenuStateValue() {
           setWallets(_wallets);
         },
         siwe,
-        setSiwe: (siwe: boolean) => setSiwe(siwe),
+        setSiwe: (siwe: boolean) => {
+          setSiwe(siwe)
+        },
         social,
         setSocial: (social: boolean) => {
-          let _connectors;
-
-          const wallets = [{
-            groupName: 'Recommended',
-            wallets: [
-              metaMaskWallet({ chains }),
-              rainbowWallet({ chains }),
-              coinbaseWallet({ appName: "AsteroidKit Demo", chains }),
-              walletConnectWallet({ chains }),
-            ],
-          }];
-
-          if( social ) {
-            wallets.push({
-              groupName: 'Social',
-              wallets: [
-                injectedWallet({ chains }),
-                rainbowWallet({ chains }),
-                walletConnectWallet({ chains }),
-              ],
-            })
-          }
-
-          _connectors = connectorsForWallets(wallets);
-
-          setConnectors(_connectors as any)
           setSocial(social);
         },
         wallets,

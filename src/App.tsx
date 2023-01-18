@@ -106,16 +106,7 @@ function App() {
           <Box position="relative">
             <ConnectButton />
 
-            <ConnectButton.Custom>
-            {({
-              connectModalOpen
-            }: any) => {
-              useEffect(() => {
-                setVisible(connectModalOpen)
-              }, [connectModalOpen])
-            }}
-            </ConnectButton.Custom>
-            {isDisconnected && (
+            {!isConnected && (
               <ArrowUpwardIcon
                 fontSize="large"
                 sx={{

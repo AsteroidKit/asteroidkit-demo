@@ -70,7 +70,7 @@ export default function FloatingMenu() {
     if(!visible) return <></>;
 
     return (
-        <div className={styles.floatingMenuWrapper}>
+        <div id="floatingMenu" className={styles.floatingMenuWrapper}>
             <div className={styles.floatingSubitemTitle}>
                 <span>Themes</span>
             </div>

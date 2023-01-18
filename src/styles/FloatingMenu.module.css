@@ -8,6 +8,7 @@
     padding: 0px 23px;
     border-radius: 20px 0px 0px 20px;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
+    display: none;
 }
 
 .floatingSubitemTitle {
