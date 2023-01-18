@@ -1,13 +1,14 @@
 import { TryRounded } from "@mui/icons-material";
 import { create } from "@mui/material/styles/createTransitions";
-import { AsteroidKitProvider, rainbowkit } from "asteroidkit";
+import { AsteroidKitProvider, createClient } from "asteroidkit";
 import { useEffect } from "react";
-import { configureChains, createClient } from "wagmi";
+import { configureChains } from "wagmi";
 import { polygon , mainnet} from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import App from "../../App";
 import { useFloatingMenuState } from "../FloatingMenuProvider/FloatingMenuProvider";
+import { WagmiConfig } from "wagmi";
 
 type AsteroidKitWrapperProps = {
     config: any;
@@ -190,17 +191,24 @@ const getDemoTheme = (name: string) => {
 export const AsteroidKitWrapper = ({ config }: AsteroidKitWrapperProps) => {
     const { color, siwe, wallets, social } = useFloatingMenuState();
 
+    const client = createClient({ 
+        appId: "YOUR_APP_ID", 
+        social,
+        wallets,
+    });
+
     return (
-        <AsteroidKitProvider 
-            wallets={wallets}
-            config={{
-                enableSiwe: siwe,
-                enableSocial: social
-            }} 
-            theme={getDemoTheme(color)} 
-            modalSize="compact" 
-            appId="843088a1-bdd7-4dd8-b18f-4da6a1ce5070">
-            <App />
-        </AsteroidKitProvider>
+        <WagmiConfig client={client}>
+            <AsteroidKitProvider 
+                config={{
+                    enableSiwe: siwe,
+                    enableSocial: social
+                }} 
+                theme={getDemoTheme(color)} 
+                modalSize="compact" 
+                appId="843088a1-bdd7-4dd8-b18f-4da6a1ce5070">
+                <App />
+            </AsteroidKitProvider>
+        </WagmiConfig>
     ) 
 }

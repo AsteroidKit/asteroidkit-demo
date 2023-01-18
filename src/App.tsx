@@ -9,7 +9,9 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { rainbowkit, wagmi } from "asteroidkit";
+import { ConnectButton } from "asteroidkit";
+import { useAccount } from "wagmi";
+
 import {
   Link as ReactRouterLink,
   Route,
@@ -65,7 +67,7 @@ const navListRainbowkit = [
 ];
 
 function App() {
-  const { address, isConnected, isDisconnected } = wagmi.useAccount();
+  const { address, isConnected, isDisconnected } = useAccount();
   const { pathname } = useLocation();
 
   const { visible, setVisible } = useFloatingMenuState();
@@ -102,9 +104,9 @@ function App() {
             </MuiLink>
           </Box>
           <Box position="relative">
-            <rainbowkit.ConnectButton />
+            <ConnectButton />
 
-            <rainbowkit.ConnectButton.Custom>
+            <ConnectButton.Custom>
             {({
               connectModalOpen
             }: any) => {
@@ -112,8 +114,7 @@ function App() {
                 setVisible(connectModalOpen)
               }, [connectModalOpen])
             }}
-            </rainbowkit.ConnectButton.Custom>
-
+            </ConnectButton.Custom>
             {isDisconnected && (
               <ArrowUpwardIcon
                 fontSize="large"

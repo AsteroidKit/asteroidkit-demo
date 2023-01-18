@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useBlockNumber } from "wagmi";
 
 export const UseBlockNumberPage = () => {
-  const { data, refetch, isError, isLoading } = wagmi.useBlockNumber();
+  const { data, refetch, isError, isLoading } = useBlockNumber();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

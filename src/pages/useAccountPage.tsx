@@ -1,9 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
+import { useAccount } from "wagmi";
 
 export const UseAccountPage = () => {
-  const { address, isConnected, isConnecting, isDisconnected } =
-    wagmi.useAccount();
+  const { address, isConnected, isConnecting, isDisconnected } = useAccount();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

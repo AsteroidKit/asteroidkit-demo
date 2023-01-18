@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
-import { rainbowkit } from "asteroidkit";
+import { useChainModal } from "asteroidkit";
 
 export const UseOpenChainModal = () => {
-  const { openChainModal } = rainbowkit.useChainModal();
+  const { openChainModal } = useChainModal();
 
   return (
     <Box display="flex" flexGrow="1" padding={4} color="white" maxWidth={1256}>

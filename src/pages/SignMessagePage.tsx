@@ -1,13 +1,13 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { wagmi } from "asteroidkit";
 import { useState } from "react";
+import { useSignMessage } from "wagmi";
 
 export const SignMessagePage = () => {
   const [message, setMessage] = useState(
     "This is a sample message from AsteroidKit"
   );
   const { data, isError, isLoading, isSuccess, error, signMessage } =
-    wagmi.useSignMessage({
+    useSignMessage({
       message: message,
     });
 
