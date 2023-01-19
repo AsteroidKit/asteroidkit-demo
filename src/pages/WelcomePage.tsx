@@ -15,10 +15,10 @@ export const WelcomePage = () => {
         alignItems="center"
       >
         <Box display="flex" alignItems="center" flexDirection="column" gap={2}>
-          <Typography variant="h2" component="div">
+          <Typography variant="h3" component="div" textAlign="center">
             Welcome to <b>AsteroidKit</b> Demo App
           </Typography>
-          <Typography variant="h4" component="div">
+          <Typography variant={"h5"} component="div" textAlign="center">
             Go ahead and connect your <b>wallet</b>
           </Typography>
         </Box>

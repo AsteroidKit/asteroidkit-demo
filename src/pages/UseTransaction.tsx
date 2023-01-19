@@ -47,13 +47,7 @@ export const UseTransaction = () => {
         color="white"
         maxWidth={1256}
       >
-        <Box
-          display="flex"
-          flexDirection="column"
-          gap={2}
-          flexGrow={1}
-          maxWidth="calc(100% - 150px)"
-        >
+        <Box display="flex" flexDirection="column" gap={2} flexGrow={1}>
           <Typography variant="h4">
             Hook for fetching transaction by hash
           </Typography>
@@ -66,8 +60,17 @@ export const UseTransaction = () => {
             </Typography>
           )}
           {!!data && (
-            <Box bgcolor="#b0b6ff" padding={3} borderRadius={2}>
-              <ReactJson src={data} collapsed />
+            <Box
+              bgcolor="#b0b6ff"
+              padding={3}
+              borderRadius={2}
+              overflow="hidden"
+            >
+              <ReactJson
+                src={data}
+                collapsed
+                style={{ wordBreak: "break-all" }}
+              />
             </Box>
           )}
           <TextField

@@ -8,9 +8,12 @@ import {
   Link as MuiLink,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { ConnectButton } from "asteroidkit";
 import { useAccount } from "wagmi";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import {
   Link as ReactRouterLink,
@@ -34,7 +37,7 @@ import { UseSwitchNetwork } from "./pages/UseSwitchNetwork";
 import { UseTransaction } from "./pages/UseTransaction";
 import { WelcomePage } from "./pages/WelcomePage";
 import { ProtectedRoute } from "./ProtectedRoute";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFloatingMenuState } from "./components/FloatingMenuProvider/FloatingMenuProvider";
 
 const upAndDown = keyframes`
@@ -69,8 +72,26 @@ const navListRainbowkit = [
 function App() {
   const { address, isConnected, isDisconnected } = useAccount();
   const { pathname } = useLocation();
+  const theme = useTheme();
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
+
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { visible, setVisible } = useFloatingMenuState();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (isSmallScreen) {
+      setIsMenuVisible(false);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (!isSmallScreen) {
+      setIsMenuVisible(true);
+    }
+  }, [isSmallScreen]);
 
   return (
     <Box
@@ -87,19 +108,33 @@ function App() {
         }}
         position="relative"
       >
-        <Toolbar>
+        <Toolbar sx={{ zIndex: 200 }}>
           <Box display="flex" flexGrow={1} alignItems="center">
+            {isSmallScreen && (
+              <Button
+                sx={{ marginRight: "4px" }}
+                size="small"
+                variant="contained"
+                onClick={() => {
+                  setIsMenuVisible((old) => !old);
+                }}
+              >
+                <MenuIcon />
+              </Button>
+            )}
             <MuiLink href="https://www.asteroidkit.com/" underline="none">
               <Box display="flex" alignItems="center">
                 <img src={AsteroidIcon} alt="AsteroidKit icon" height={30} />
 
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{ flexGrow: 1, paddingLeft: "4px", color: "white" }}
-                >
-                  AsteroidKit
-                </Typography>
+                {!isSmallScreen && (
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ flexGrow: 1, paddingLeft: "4px", color: "white" }}
+                  >
+                    AsteroidKit
+                  </Typography>
+                )}
               </Box>
             </MuiLink>
           </Box>
@@ -119,14 +154,21 @@ function App() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box flexGrow={1} display="flex" flexShrink={0}>
+      <Box flexGrow={1} display="flex" flexShrink={0} position="relative">
         {isConnected && (
           <Box
+            position={isSmallScreen ? "absolute" : "relative"}
+            zIndex={100}
+            bottom={0}
+            top={0}
+            sx={{
+              background: "#343236",
+              transition: "opacity 195ms cubic-bezier(0.4, 0, 0.2, 1)",
+              opacity: isMenuVisible ? 1 : 0,
+              pointerEvents: isMenuVisible ? "auto" : "none",
+            }}
             width="150px"
             minWidth={150}
-            sx={{
-              bgcolor: "#353236",
-            }}
             boxShadow="0px 3px 14px 9px rgba(0, 0, 0, 0.2)"
             padding="64px 12px"
             display="flex"
@@ -160,7 +202,6 @@ function App() {
                 {item.path}
               </Button>
             ))}
-            {/* <Box paddingTop="12px"> */}
             <Typography
               color="#b4b4b4"
               textAlign="center"
@@ -176,7 +217,6 @@ function App() {
             >
               Rainbowkit Hooks
             </Typography>
-            {/* </Box> */}
 
             {navListRainbowkit.map((item) => (
               <Button
@@ -194,14 +234,27 @@ function App() {
           </Box>
         )}
         <Box
+          position="absolute"
+          width="100%"
+          height="100%"
+          sx={{
+            bgcolor: "#000000b1",
+            zIndex: 50,
+            transition: "opacity 195ms cubic-bezier(0.4, 0, 0.2, 1)",
+            opacity: isSmallScreen && isMenuVisible ? 1 : 0,
+            pointerEvents: isSmallScreen && isMenuVisible ? "auto" : "none",
+          }}
+          onClick={() => setIsMenuVisible(false)}
+        />
+
+        <Box
           padding={4}
+          position="relative"
           color="white"
           display="flex"
           maxHeight={"calc(100vh - 130px)"}
           overflow="hidden auto"
           width="100%"
-          maxWidth={"calc(100% - 150px"}
-          justifyContent="center"
         >
           <Routes>
             <Route index element={<WelcomePage />} />
