@@ -1792,10 +1792,10 @@ assert@^2.0.0:
     object-is "^1.0.1"
     util "^0.12.0"
 
-asteroidkit@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/asteroidkit/-/asteroidkit-0.0.22.tgz#9129b4bb9e3434e021f9d355ca6ba93ef9691797"
-  integrity sha512-hmKqdyf9N1TVN29NnwDcZb7fWPuE2jlvaM8n5lCMldmeq2eqtq4JjytIQWiD5sDGa5zFj/kSHlscSlRMLNgtDQ==
+asteroidkit@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/asteroidkit/-/asteroidkit-0.0.23.tgz#747dbd14ef5ad2eb12bb53527570e42fba744e4f"
+  integrity sha512-70MO9laMJ14m8ubWha1aW3lJHnP5UxJV+PgGBoxKJkj5fYXv0gq7YyGIsqQmriFsoVW61J8PRuK7drpws/CX4Q==
   dependencies:
     "@babel/runtime" ">=7.0.0 <8.0.0"
     "@rainbow-me/rainbowkit" "^0.8.1"
