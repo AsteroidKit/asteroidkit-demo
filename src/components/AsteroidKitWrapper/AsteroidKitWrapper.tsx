@@ -210,7 +210,8 @@ const handleVisibiliyWallets = (wallets: any) => {
         'ledger': el_ledger,
     } as any
 
-    for (let i = 0; i < wallets.length; i++) {
+    if(wallets) {
+      for (let i = 0; i < wallets.length; i++) {
         const wallet = wallets[i];
 
         if(!elements[wallet.name]) continue;
@@ -221,6 +222,7 @@ const handleVisibiliyWallets = (wallets: any) => {
             elements[wallet.name].style.display = "none";
         }
     }
+  }
 }
 
 const handleVisibiliySocial = (social: boolean) => {
@@ -246,12 +248,11 @@ function handleFloatingMenu() {
     let floatingMenu = document.getElementById("floatingMenu") as HTMLElement;
     
     if(el) {
-        floatingMenu.style.display = "block";
+      if(floatingMenu) floatingMenu.style.display = "block";
     } else {
-        floatingMenu.style.display = "none";
+      if(floatingMenu) floatingMenu.style.display = "none";
     }
 }
-
 
 setInterval(() => {
     handleVisibiliySocial(global_social);
@@ -271,7 +272,12 @@ export const AsteroidKitWrapper = ({ config }: AsteroidKitWrapperProps) => {
       return createClient({ 
           appId: "YOUR_APP_ID", 
           social: true,
-          wallets: wallets,
+          wallets: [
+            { "name": "metamask", enabled: true },
+            { "name": "coinbase", enabled: true },
+            { "name": "ledger", enabled: true },
+            { "name": "argent", enabled: false }
+          ],
       })
   }, []);
 
