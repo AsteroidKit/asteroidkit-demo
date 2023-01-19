@@ -110,7 +110,7 @@ function App() {
       >
         <Toolbar sx={{ zIndex: 200 }}>
           <Box display="flex" flexGrow={1} alignItems="center">
-            {isSmallScreen && (
+            {isSmallScreen && isConnected && (
               <Button
                 sx={{ marginRight: "4px" }}
                 size="small"
@@ -126,7 +126,7 @@ function App() {
               <Box display="flex" alignItems="center">
                 <img src={AsteroidIcon} alt="AsteroidKit icon" height={30} />
 
-                {!isSmallScreen && (
+                {(!isSmallScreen || isDisconnected) && (
                   <Typography
                     variant="h5"
                     component="div"
