@@ -39,6 +39,7 @@ import { WelcomePage } from "./pages/WelcomePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useEffect, useState } from "react";
 import { useFloatingMenuState } from "./components/FloatingMenuProvider/FloatingMenuProvider";
+import { SignTypedMessagePage } from "./pages/SignTypedMessagePage";
 
 const upAndDown = keyframes`
   from {
@@ -53,6 +54,10 @@ const navListWagmi = [
   {
     path: "useSignMessage",
     component: <SignMessagePage />,
+  },
+  {
+    path: "useTypedSignMessage",
+    component: <SignTypedMessagePage />,
   },
   { path: "useAccount", component: <UseAccountPage /> },
   { path: "useBalance", component: <UseBalancePage /> },
@@ -167,8 +172,8 @@ function App() {
               opacity: isMenuVisible ? 1 : 0,
               pointerEvents: isMenuVisible ? "auto" : "none",
             }}
-            width="150px"
-            minWidth={150}
+            width="200px"
+            minWidth={200}
             boxShadow="0px 3px 14px 9px rgba(0, 0, 0, 0.2)"
             padding="64px 12px"
             display="flex"
